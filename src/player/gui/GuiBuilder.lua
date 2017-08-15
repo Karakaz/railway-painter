@@ -78,7 +78,7 @@ function GuiBuilder:addRuleSettingsGui()
 end
 
 function GuiBuilder:addPreviewFrame()
-    self.gui.previewArea.builder:createGui(self.gui.playerFrameFlow)
+    self.gui.previewArea.builder:createGui(self.gui.windowFlow)
 end
 
 return GuiBuilder
