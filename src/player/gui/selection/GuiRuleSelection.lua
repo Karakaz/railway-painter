@@ -11,13 +11,13 @@ function GuiRuleSelection.new(parentElement)
     return self
 end
 
-function GuiRuleSelection:getSelectedRule()
+function GuiRuleSelection:getSelectedRuleText()
     local index = self.selectionDropdown.selected_index
     return self.selectionDropdown.items[index]
 end
 
 function GuiRuleSelection:deleteRule()
-    local rule = self:getSelectedRule()
+    local rule = self:getSelectedRuleText()
     Rules:deleteRule(rule)
     self:enableSelection()
     self:disableSelectionButtons()

@@ -74,7 +74,7 @@ function GuiBuilder:addErrorLabel()
 end
 
 function GuiBuilder:addRuleSettingsGui()
-    self.gui.settings = GuiRuleSettings.new(self.gui.frameTable, self.gui.colorManager, self.factorioPlayer.force)
+    self.gui.settings = GuiRuleSettings.new(self.gui.frameTable, self.gui.colorManager, self.factorioPlayer)
 end
 
 function GuiBuilder:addPreviewFrame()

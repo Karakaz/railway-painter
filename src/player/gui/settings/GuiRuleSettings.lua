@@ -4,21 +4,21 @@ local GuiRuleSettingsBuilder = require("src/player/gui/settings/GuiRuleSettingsB
 local GuiRuleSettings = {}
 GuiRuleSettings.__index = GuiRuleSettings
 
-function GuiRuleSettings.new(parentElement, colorManager, force)
+function GuiRuleSettings.new(parentElement, colorManager, factorioPlayer)
     local self = setmetatable({}, GuiRuleSettings)
     self.colorManager = colorManager
-    self.force = force
+    self.factorioPlayer = factorioPlayer
     self.builder = GuiRuleSettingsBuilder.new(self)
     self.builder:createGui(parentElement)
     return self
 end
 
-function GuiRuleSettings:loadSetting(rule, config)
-    self.ruleField.text = rule
-    self.regexCheckbox.state = config.regex
-    self.trainCheckbox.state = config.trains
-    self.wagonCheckbox.state = config.wagons
-    self.colorManager:setHex(config.hex)
+function GuiRuleSettings:loadRule(rule)
+    self.ruleField.text = rule.ruleText
+    self.regexCheckbox.state = rule.regex
+    self.trainCheckbox.state = rule.trains
+    self.wagonCheckbox.state = rule.wagons
+    self.colorManager:setHex(rule.hex)
     self:showSettingsFrame()
 end
 
@@ -45,8 +45,9 @@ function GuiRuleSettings:saveRule()
     local train = self.trainCheckbox.state
     local wagon = self.wagonCheckbox.state
     local hex = self.colorManager:getHex()
-    Rules:saveRule(self.factorioPlayer.force, rule, regex, train, wagon, hex)
+    local rule = Rules:saveRule(self.factorioPlayer.force, rule, regex, train, wagon, hex)
     self:hideSettingsFrame()
+    return rule
 end
 
 function GuiRuleSettings:ruleUpdated()

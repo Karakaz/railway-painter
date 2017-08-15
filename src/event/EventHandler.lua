@@ -6,15 +6,21 @@ local train_util = require("src/util/train_util")
 local EventHandler = {}
 
 function EventHandler.on_init()
-    game.print("on_init")
     Rules:initialize()
     Players:initialize()
+    EventHandler.registerDependencyEvents()
 end
 
 function EventHandler.on_load()
-    game.print("on_load")
     Rules:loadRulesFromGlobal()
     Players:loadPlayersFromGlobal()
+    EventHandler.registerDependencyEvents()
+end
+
+function EventHandler.registerDependencyEvents()
+    if remote.interfaces["color-picker"] then
+        script.on_event(remote.call("color-picker", "on_color_updated"), EventHandler.color_picker_on_color_updated)
+    end
 end
 
 function EventHandler.on_configuration_changed(data)
@@ -22,7 +28,6 @@ function EventHandler.on_configuration_changed(data)
 end
 
 function EventHandler.on_player_joined_game(event)
-    game.print("on_player_joined_game")
     Players:fetch(event.player_index):initialize()
 end
 
@@ -45,8 +50,8 @@ function EventHandler.on_gui_click(event)
     elseif elementName == RPName("new_button") then
         player.gui:newRule()
     elseif elementName == RPName("save_button") then
-        player.gui:saveRule()
-        TriggerHandler:ruleChanged()
+        local rule = player.gui:saveRule()
+        TriggerHandler:ruleChanged(rule)
     elseif elementName == RPName("cancel_button") then
         player.gui:cancelRule()
     end
@@ -108,6 +113,12 @@ function EventHandler.on_train_changed_state(event)
         end
     elseif event.train.state == defines.train_state.wait_station then
         TriggerHandler:trainOnStation(event.train, event.train.station)
+    end
+end
+
+function EventHandler.color_picker_on_color_updated(event)
+    if event.container.name == RPName("color_picker") then
+        Players:fetch(event.player_index).gui:pickerColorUpdated(event.color)
     end
 end
 

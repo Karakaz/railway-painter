@@ -5,9 +5,6 @@ local Gui = {}
 Gui.__index = Gui
 
 function Gui.new(factorioPlayer, colorManager, previewArea, errorHandler)
-    for k,v in pairs(game.surfaces) do
-        game.print(tostring(k))
-    end
     local self = setmetatable({}, Gui)
     self.previewArea = previewArea
     self.colorManager = colorManager
@@ -18,7 +15,7 @@ function Gui.new(factorioPlayer, colorManager, previewArea, errorHandler)
 end
 
 function Gui:updateColorController()
-    self.settings.colorManager.updateColorController()
+    self.colorManager.updateColorController()
 end
 
 function Gui:toggle()
@@ -26,10 +23,10 @@ function Gui:toggle()
 end
 
 function Gui:loadRule()
-    local rule = self.selection:getSelectedRule()
-    local config = Rules:getConfig(rule)
-    self.settings:loadSetting(rule, config)
-    self.previewArea:loadConfig(config)
+    local ruleText = self.selection:getSelectedRuleText()
+    local rule = Rules:getRule(ruleText)
+    self.settings:loadRule(rule)
+    self.previewArea:loadRule(rule)
     self.selection:disableSelection()
 end
 
@@ -73,7 +70,12 @@ function Gui:wagonCheckboxUpdated()
 end
 
 function Gui:colorFieldUpdated(textField)
-    self.settings.colorManager:textFieldUpdated(textField)
+    self.colorManager:textFieldUpdated(textField)
+    self.previewArea:updateColor()
+end
+
+function Gui:pickerColorUpdated(color)
+    self.colorManager:setColor(color)
     self.previewArea:updateColor()
 end
 

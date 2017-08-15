@@ -4,7 +4,6 @@ local Player = require("src/player/Player")
 local Players = {}
 
 function Players:initialize()
-    game.print("Players:initialize()")
     self:loadPlayersFromGlobal()
 end
 
@@ -13,6 +12,9 @@ function Players:loadPlayersFromGlobal()
         global.players = {}
     end
     self.players = global.players
+    for _,player in pairs(self.players) do
+        setmetatable(player.gui, {__index = player.gui})
+    end
 end
 
 function Players:updateColorController()
@@ -30,7 +32,6 @@ function Players:unlockRailwayPainter(force)
 end
 
 function Players:fetch(identifier)
-    game.print("Players:fetch(" .. tostring(identifier) .. ")")
     if type(identifier) == "number" then
         return self:fetchFromFactorioPlayer(game.players[identifier])
     elseif type(identifier) == "table" then

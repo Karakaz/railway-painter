@@ -45,7 +45,6 @@ end
 
 --@Override
 function ColorTable:getColor()
-    game.print("ColorTable:getColor() " .. self.colorHex)
     return hex_util.toRGB(self.colorHex)
 end
 
@@ -56,20 +55,17 @@ end
 
 --@Override
 function ColorTable:setColor(color)
-    game.print("ColorTable:setColor(" .. tostring(color) .. ")")
     self.colorHex = hex_util.toHex(color)
     self:updateGui()
 end
 
 --@Override
 function ColorTable:setHex(hex)
-    game.print("ColorTable:setHex(" .. tostring(hex) .. ")")
     self.colorHex = hex
     self:updateGui()
 end
 
 function ColorTable:updateGui()
-    game.print("ColorTable:updateGui() " .. self.colorHex)
     local color = hex_util.toRGB(self.colorHex)
     self.redField.text = color.r
     self.greenField.text = color.g

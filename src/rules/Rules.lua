@@ -32,6 +32,7 @@ end
 
 function Rules:saveRule(force, ruleText, regex, trains, wagons, hex)
     self.rules[ruleText] = Rule.new(force.name, ruleText, regex, trains, wagons, hex)
+    return self.rules[ruleText]
 end
 
 function Rules:deleteRule(ruleText)

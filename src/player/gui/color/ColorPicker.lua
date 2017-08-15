@@ -4,7 +4,7 @@ ColorPicker.__index = ColorPicker
 
 function ColorPicker.new(parentElement)
     local self = setmetatable({}, ColorPicker)
-    self.colorPicker = remote.call("color-picker", "add-instance", {
+    self.colorPicker = remote.call("color-picker", "add_instance", {
         parent = parentElement,
         container_name = RPName("color_picker")
     })

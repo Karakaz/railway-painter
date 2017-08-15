@@ -19,13 +19,13 @@ function PreviewArea:newRule()
     self:show()
 end
 
-function PreviewArea:loadConfig(config)
-    if config.trains then
+function PreviewArea:loadRule(rule)
+    if rule.trains then
         self:addLocomotive()
     else
         self:removeLocomotive()
     end
-    if config.wagons then
+    if rule.wagons then
         self:addWagons()
     else
         self:removeWagons()
