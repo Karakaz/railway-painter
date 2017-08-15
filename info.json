@@ -1,0 +1,10 @@
+{
+	"name": "railway-painter",
+	"version": "1.0.0",
+	"title": "Railway Painter",
+	"author": "Karakaz",
+	"homepage": "https://github.com/Karakaz/Railway-Painter",
+	"description": "Automatically color stations and trains containing specified keywords",
+	"factorio_version": "0.15",
+	"dependencies": ["? color-picker >= 0.3.0"]
+}
