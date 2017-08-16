@@ -4,7 +4,7 @@ local GuiBuilder = require("src/player/gui/GuiBuilder")
 local Gui = {}
 
 function Gui:updateColorController()
-    self.colorManager.updateColorController()
+    self.colorManager:updateColorController()
 end
 
 function Gui:toggle()
