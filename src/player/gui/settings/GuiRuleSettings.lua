@@ -5,7 +5,6 @@ local GuiRuleSettings = {}
 
 function GuiRuleSettings:loadRule(rule)
     self.ruleField.text = rule.ruleText
-    self.regexCheckbox.state = rule.regex
     self.trainCheckbox.state = rule.trains
     self.wagonCheckbox.state = rule.wagons
     self.colorManager:setHex(rule.hex)
@@ -14,7 +13,6 @@ end
 
 function GuiRuleSettings:newRule()
     self.ruleField.text = ""
-    self.regexCheckbox.state = false
     self.trainCheckbox.state = true
     self.wagonCheckbox.state = false
     self.colorManager:setHex("000000")
@@ -31,11 +29,10 @@ end
 
 function GuiRuleSettings:saveRule()
     local rule = self.ruleField.text
-    local regex = self.regexCheckbox.state
     local train = self.trainCheckbox.state
     local wagon = self.wagonCheckbox.state
     local hex = self.colorManager:getHex()
-    local rule = Rules:saveRule(self.factorioPlayer.force, rule, regex, train, wagon, hex)
+    local rule = Rules:saveRule(self.factorioPlayer.force, rule, train, wagon, hex)
     self:hideSettingsFrame()
     return rule
 end

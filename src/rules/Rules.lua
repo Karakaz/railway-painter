@@ -30,8 +30,8 @@ function Rules:getRule(ruleText)
     return self.rules[ruleText]
 end
 
-function Rules:saveRule(force, ruleText, regex, trains, wagons, hex)
-    self.rules[ruleText] = Rule.new(force.name, ruleText, regex, trains, wagons, hex)
+function Rules:saveRule(force, ruleText, trains, wagons, hex)
+    self.rules[ruleText] = Rule.new(force.name, ruleText, trains, wagons, hex)
     return self.rules[ruleText]
 end
 

@@ -9,30 +9,18 @@ function GuiRuleSettingsBuilder:createGui(parentElement)
     }
     self.settings.frame.style.visible = false
 
-    self:addRuleFlow()
+    self:addRuleField()
     self:addTrainCheckbox()
     self:addWagonCheckbox()
     self:addColorGui()
     self:addActionFlow()
 end
 
-function GuiRuleSettingsBuilder:addRuleFlow()
-    self.settings.ruleFlow = self.settings.frame.add{
-        type = "flow",
-        name = RPName("rule_flow"),
-        direction = "horizontal"
-    }
-    self.settings.ruleField = self.settings.ruleFlow.add{
+function GuiRuleSettingsBuilder:addRuleField()
+    self.settings.ruleField = self.settings.frame.add{
         type = "textfield",
         name = RPName("rule_field"),
         tooltip = {RPName("rule_field_tooltip")}
-    }
-    self.settings.regexCheckbox = self.settings.ruleFlow.add{
-        type = "checkbox",
-        name = RPName("regex_checkbox"),
-        caption = {RPName("regex_checkbox_caption")},
-        tooltip = {RPName("regex_checkbox_tooltip")},
-        state = false
     }
 end
 
@@ -57,7 +45,12 @@ function GuiRuleSettingsBuilder:addWagonCheckbox()
 end
 
 function GuiRuleSettingsBuilder:addColorGui()
-    self.settings.colorManager:createGui(self.settings.frame)
+    self.settings.colorFlow = self.settings.frame.add{
+        type = "flow",
+        name = RPName("color_flow"),
+        direction = "horizontal"
+    }
+    self.settings.colorManager:createGui(self.settings.colorFlow)
 end
 
 function GuiRuleSettingsBuilder:addActionFlow()
