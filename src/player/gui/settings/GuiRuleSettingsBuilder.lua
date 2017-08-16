@@ -9,6 +9,12 @@ function GuiRuleSettingsBuilder:createGui(parentElement)
     }
     self.settings.frame.style.visible = false
 
+    self.settings.frameTable = self.settings.frame.add{
+        type = "table",
+        name = RPName("settings_frame_table"),
+        colspan = 1
+    }
+
     self:addRuleField()
     self:addTrainCheckbox()
     self:addWagonCheckbox()
@@ -17,7 +23,7 @@ function GuiRuleSettingsBuilder:createGui(parentElement)
 end
 
 function GuiRuleSettingsBuilder:addRuleField()
-    self.settings.ruleField = self.settings.frame.add{
+    self.settings.ruleField = self.settings.frameTable.add{
         type = "textfield",
         name = RPName("rule_field"),
         tooltip = {RPName("rule_field_tooltip")}
@@ -25,7 +31,7 @@ function GuiRuleSettingsBuilder:addRuleField()
 end
 
 function GuiRuleSettingsBuilder:addTrainCheckbox()
-    self.settings.trainCheckbox = self.settings.frame.add{
+    self.settings.trainCheckbox = self.settings.frameTable.add{
         type = "checkbox",
         name = RPName("train_checkbox"),
         caption = {RPName("train_checkbox_caption")},
@@ -35,7 +41,7 @@ function GuiRuleSettingsBuilder:addTrainCheckbox()
 end
 
 function GuiRuleSettingsBuilder:addWagonCheckbox()
-    self.settings.wagonCheckbox = self.settings.frame.add{
+    self.settings.wagonCheckbox = self.settings.frameTable.add{
         type = "checkbox",
         name = RPName("wagon_checkbox"),
         caption = {RPName("wagon_checkbox_caption")},
@@ -45,7 +51,7 @@ function GuiRuleSettingsBuilder:addWagonCheckbox()
 end
 
 function GuiRuleSettingsBuilder:addColorGui()
-    self.settings.colorFlow = self.settings.frame.add{
+    self.settings.colorFlow = self.settings.frameTable.add{
         type = "flow",
         name = RPName("color_flow"),
         direction = "horizontal"
@@ -54,7 +60,7 @@ function GuiRuleSettingsBuilder:addColorGui()
 end
 
 function GuiRuleSettingsBuilder:addActionFlow()
-    self.settings.actionFlow = self.settings.frame.add{
+    self.settings.actionFlow = self.settings.frameTable.add{
         type = "flow",
         name = RPName("action_flow"),
         direction = "horizontal"

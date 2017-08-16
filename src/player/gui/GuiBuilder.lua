@@ -12,20 +12,6 @@ function GuiBuilder:createGui()
     self:addPreviewFrame()
 end
 
-function GuiBuilder:createGuiButton()
-    local flow = mod_gui.get_button_flow(self.factorioPlayer)
-    if not flow[RPName("open_gui_button")] then
-        local button = flow.add({
-            type = "sprite-button",
-            name = RPName("open_gui_button"),
-            style = mod_gui.button_style,
-            sprite = "item/" .. RPName("icon_item"),
-            tooltip = {RPName("open_gui_button_tooltip")}
-        })
-        button.style.visible = true
-    end
-end
-
 function GuiBuilder:createWindow()
     self.gui.windowFlow = self.gui.playerFrameFlow.add{
         type = "flow",
@@ -70,6 +56,20 @@ end
 
 function GuiBuilder:addPreviewFrame()
     self.gui.previewArea.builder:createGui(self.gui.windowFlow)
+end
+
+function GuiBuilder:createGuiButton()
+    local flow = mod_gui.get_button_flow(self.factorioPlayer)
+    if not flow[RPName("open_gui_button")] then
+        local button = flow.add({
+            type = "sprite-button",
+            name = RPName("open_gui_button"),
+            style = mod_gui.button_style,
+            sprite = "item/" .. RPName("icon_item"),
+            tooltip = {RPName("open_gui_button_tooltip")}
+        })
+        button.style.visible = true
+    end
 end
 
 function GuiBuilder.new(gui, factorioPlayer)

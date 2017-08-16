@@ -31,7 +31,7 @@ function TriggerHandler:trainOnStation(train, station)
 end
 
 function TriggerHandler:findRule(stationName)
-    for _,rule in ipairs(Rules:getRules()) do
+    for _,rule in pairs(Rules:getRules()) do
         if stationName:find(rule.ruleText) then
             return rule
         end
