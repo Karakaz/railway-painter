@@ -2,13 +2,6 @@
 local Stack = require("src/util/Stack")
 
 local ErrorHandler = {}
-ErrorHandler.__index = ErrorHandler
-
-function ErrorHandler.new()
-    local self = setmetatable({}, ErrorHandler)
-    self.errorStack = Stack:create()
-    return self
-end
 
 function ErrorHandler:registerErrorLabel(errorLabel)
     self.errorLabel = errorLabel
@@ -30,6 +23,12 @@ function ErrorHandler:clearError(error)
             self.errorLabel.caption = ""
         end
     end
+end
+
+function ErrorHandler.new()
+    local self = Object.new(ErrorHandler)
+    self.errorStack = Stack:create()
+    return self
 end
 
 return ErrorHandler

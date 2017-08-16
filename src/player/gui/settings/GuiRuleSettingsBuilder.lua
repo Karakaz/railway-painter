@@ -1,12 +1,5 @@
 
 local GuiRuleSettingsBuilder = {}
-GuiRuleSettingsBuilder.__index = GuiRuleSettingsBuilder
-
-function GuiRuleSettingsBuilder.new(settings)
-    local self = setmetatable({}, GuiRuleSettingsBuilder)
-    self.settings = settings
-    return self
-end
 
 function GuiRuleSettingsBuilder:createGui(parentElement)
     self.settings.frame = parentElement.add{
@@ -84,6 +77,12 @@ function GuiRuleSettingsBuilder:addActionFlow()
         name = RPName("cancel_button"),
         caption = {RPName("cancel_button_caption")}
     }
+end
+
+function GuiRuleSettingsBuilder.new(settings)
+    local self = Object.new(GuiRuleSettingsBuilder)
+    self.settings = settings
+    return self
 end
 
 return GuiRuleSettingsBuilder

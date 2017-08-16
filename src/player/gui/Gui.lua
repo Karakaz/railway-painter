@@ -2,17 +2,6 @@
 local GuiBuilder = require("src/player/gui/GuiBuilder")
 
 local Gui = {}
-Gui.__index = Gui
-
-function Gui.new(factorioPlayer, colorManager, previewArea, errorHandler)
-    local self = setmetatable({}, Gui)
-    self.previewArea = previewArea
-    self.colorManager = colorManager
-    self.errorHandler = errorHandler
-    self.builder = GuiBuilder.new(self, factorioPlayer)
-    self.builder:createGui()
-    return self
-end
 
 function Gui:updateColorController()
     self.colorManager.updateColorController()
@@ -77,6 +66,16 @@ end
 function Gui:pickerColorUpdated(color)
     self.colorManager:setColor(color)
     self.previewArea:updateColor()
+end
+
+function Gui.new(factorioPlayer, colorManager, previewArea, errorHandler)
+    local self = Object.new(Gui)
+    self.previewArea = previewArea
+    self.colorManager = colorManager
+    self.errorHandler = errorHandler
+    self.builder = GuiBuilder.new(self, factorioPlayer)
+    self.builder:createGui()
+    return self
 end
 
 return Gui

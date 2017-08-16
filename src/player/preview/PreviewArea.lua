@@ -2,15 +2,6 @@
 local PreviewAreaBuilder = require("src/player/preview/PreviewAreaBuilder")
 
 local PreviewArea = {}
-PreviewArea.__index = PreviewArea
-
-function PreviewArea.new(playerName, colorManager)
-    local self = setmetatable({}, PreviewArea)
-    self.colorManager = colorManager
-    self.builder = PreviewAreaBuilder.new(self, playerName)
-    self.builder:createPreviewArea()
-    return self
-end
 
 function PreviewArea:newRule()
     self:addLocomotive()
@@ -113,6 +104,14 @@ end
 
 function PreviewArea:hide()
     self.previewFrame.style.visible = false
+end
+
+function PreviewArea.new(playerName, colorManager)
+    local self = Object.new(PreviewArea)
+    self.colorManager = colorManager
+    self.builder = PreviewAreaBuilder.new(self, playerName)
+    self.builder:createPreviewArea()
+    return self
 end
 
 return PreviewArea

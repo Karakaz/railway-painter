@@ -2,16 +2,6 @@
 local GuiRuleSettingsBuilder = require("src/player/gui/settings/GuiRuleSettingsBuilder")
 
 local GuiRuleSettings = {}
-GuiRuleSettings.__index = GuiRuleSettings
-
-function GuiRuleSettings.new(parentElement, colorManager, factorioPlayer)
-    local self = setmetatable({}, GuiRuleSettings)
-    self.colorManager = colorManager
-    self.factorioPlayer = factorioPlayer
-    self.builder = GuiRuleSettingsBuilder.new(self)
-    self.builder:createGui(parentElement)
-    return self
-end
 
 function GuiRuleSettings:loadRule(rule)
     self.ruleField.text = rule.ruleText
@@ -56,6 +46,15 @@ function GuiRuleSettings:ruleUpdated()
     else
         self.saveButton.enabled = false
     end
+end
+
+function GuiRuleSettings.new(parentElement, colorManager, factorioPlayer)
+    local self = Object.new(GuiRuleSettings)
+    self.colorManager = colorManager
+    self.factorioPlayer = factorioPlayer
+    self.builder = GuiRuleSettingsBuilder.new(self)
+    self.builder:createGui(parentElement)
+    return self
 end
 
 return GuiRuleSettings

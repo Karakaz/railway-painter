@@ -2,14 +2,6 @@
 local GuiRuleSelectionBuilder = require("src/player/gui/selection/GuiRuleSelectionBuilder")
 
 local GuiRuleSelection = {}
-GuiRuleSelection.__index = GuiRuleSelection
-
-function GuiRuleSelection.new(parentElement)
-    local self = setmetatable({}, GuiRuleSelection)
-    self.builder = GuiRuleSelectionBuilder.new(self, parentElement)
-    self.builder:build()
-    return self
-end
 
 function GuiRuleSelection:getSelectedRuleText()
     local index = self.selectionDropdown.selected_index
@@ -57,6 +49,13 @@ end
 function GuiRuleSelection:disableSelectionButtons()
     self.loadButton.enabled = false
     self.deleteButton.enabled = false
+end
+
+function GuiRuleSelection.new(parentElement)
+    local self = Object.new(GuiRuleSelection)
+    self.builder = GuiRuleSelectionBuilder.new(self, parentElement)
+    self.builder:build()
+    return self
 end
 
 return GuiRuleSelection

@@ -1,12 +1,5 @@
 
 local ColorManager = {}
-ColorManager.__index = ColorManager
-
-function ColorManager.new(errorHandler)
-    local self = setmetatable({}, ColorManager)
-    self.errorHandler = errorHandler
-    return self
-end
 
 function ColorManager:createGui(parentElement)
     self.parentElement = parentElement
@@ -65,6 +58,12 @@ end
 --- Detroy the gui elements
 function ColorManager:destroy()
     self.controller:destroy()
+end
+
+function ColorManager.new(errorHandler)
+    local self = Object.new(ColorManager)
+    self.errorHandler = errorHandler
+    return self
 end
 
 return ColorManager

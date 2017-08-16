@@ -3,7 +3,7 @@
 -- Global variables ---------------------------------------------------------------------
 
 hex_util = require("src/util/hex_util")
-
+Object = require("src/util/Object")
 Rules = require("src/rules/Rules")
 RailwayPainterConstants = require("src/RailwayPainterConstants")
 RPName = RailwayPainterConstants.name

@@ -5,15 +5,6 @@ local GuiRuleSelection = require("src/player/gui/selection/GuiRuleSelection")
 local GuiRuleSettings = require("src/player/gui/settings/GuiRuleSettings")
 
 local GuiBuilder = {}
-GuiBuilder.__index = GuiBuilder
-
-function GuiBuilder.new(gui, factorioPlayer)
-    local self = setmetatable({}, GuiBuilder)
-    self.gui = gui
-    self.factorioPlayer = factorioPlayer
-    self.gui.playerFrameFlow = mod_gui.get_frame_flow(factorioPlayer)
-    return self
-end
 
 function GuiBuilder:createGui()
     self:createWindow()
@@ -79,6 +70,14 @@ end
 
 function GuiBuilder:addPreviewFrame()
     self.gui.previewArea.builder:createGui(self.gui.windowFlow)
+end
+
+function GuiBuilder.new(gui, factorioPlayer)
+    local self = Object.new(GuiBuilder)
+    self.gui = gui
+    self.factorioPlayer = factorioPlayer
+    self.gui.playerFrameFlow = mod_gui.get_frame_flow(factorioPlayer)
+    return self
 end
 
 return GuiBuilder

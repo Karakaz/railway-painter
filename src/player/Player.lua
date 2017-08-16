@@ -5,15 +5,6 @@ local PreviewArea = require("src/player/preview/PreviewArea")
 local Gui = require("src/player/gui/Gui")
 
 local Player = {}
-Player.__index = Player
-
-function Player.new(factorioPlayer)
-    local self = setmetatable({}, Player)
-    self.factorioPlayer = factorioPlayer
-    self.name = factorioPlayer.name
-    self.force = factorioPlayer.force
-    return self
-end
 
 function Player:initialize()
     if not self.initialized then
@@ -32,6 +23,14 @@ end
 
 function Player:enableRailwayPainter()
     self.gui.builder:createGuiButton()
+end
+
+function Player.new(factorioPlayer)
+    local self = Object.new(Player)
+    self.factorioPlayer = factorioPlayer
+    self.name = factorioPlayer.name
+    self.force = factorioPlayer.force
+    return self
 end
 
 return Player

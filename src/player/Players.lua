@@ -12,9 +12,6 @@ function Players:loadPlayersFromGlobal()
         global.players = {}
     end
     self.players = global.players
-    for _,player in pairs(self.players) do
-        setmetatable(player.gui, {__index = player.gui})
-    end
 end
 
 function Players:updateColorController()

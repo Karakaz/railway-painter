@@ -1,9 +1,8 @@
 
 local Rule = {}
-Rule.__index = Rule
 
 function Rule.new(force, ruleText, regex, trains, wagons, hex)
-    local self = setmetatable({}, Rule)
+    local self = Object.new(Rule)
     self.force = force
     self.ruleText = ruleText
     self.regex = regex

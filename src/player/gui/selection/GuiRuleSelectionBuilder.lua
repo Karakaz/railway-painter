@@ -1,13 +1,5 @@
 
 local GuiRuleSelectionBuilder = {}
-GuiRuleSelectionBuilder.__index = GuiRuleSelectionBuilder
-
-function GuiRuleSelectionBuilder.new(selection, parentElement)
-    local self = setmetatable({}, GuiRuleSelectionBuilder)
-    self.selection = selection
-    self.parentElement = parentElement
-    return self
-end
 
 function GuiRuleSelectionBuilder:build()
     self:addSelectionDropdown()
@@ -53,6 +45,13 @@ function GuiRuleSelectionBuilder:addNewButton()
         name = RPName("new_button"),
         caption = {RPName("new_button_caption")}
     }
+end
+
+function GuiRuleSelectionBuilder.new(selection, parentElement)
+    local self = Object.new(GuiRuleSelectionBuilder)
+    self.selection = selection
+    self.parentElement = parentElement
+    return self
 end
 
 return GuiRuleSelectionBuilder

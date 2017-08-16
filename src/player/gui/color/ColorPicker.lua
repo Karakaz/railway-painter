@@ -1,15 +1,5 @@
 
 local ColorPicker = {} -- implements ColorControllerInterface
-ColorPicker.__index = ColorPicker
-
-function ColorPicker.new(parentElement)
-    local self = setmetatable({}, ColorPicker)
-    self.colorPicker = remote.call("color-picker", "add_instance", {
-        parent = parentElement,
-        container_name = RPName("color_picker")
-    })
-    return self
-end
 
 function ColorPicker:getColor()
     return remote.call("color-picker", "get_color", self.colorPicker)
@@ -33,6 +23,15 @@ end
 
 function ColorPicker:destroy()
     self.colorPicker.destroy()
+end
+
+function ColorPicker.new(parentElement)
+    local self = Object.new(ColorPicker)
+    self.colorPicker = remote.call("color-picker", "add_instance", {
+        parent = parentElement,
+        container_name = RPName("color_picker")
+    })
+    return self
 end
 
 return ColorPicker

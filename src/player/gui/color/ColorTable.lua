@@ -1,31 +1,5 @@
 
 local ColorTable = {} -- implements ColorControllerInterface
-ColorTable.__index = ColorTable
-
-function ColorTable.new(parentElement, errorHandler)
-    local self = setmetatable({}, ColorTable)
-    self.errorHandler = errorHandler
-    self.colorHex = "000000"
-
-    self.colorTable = parentElement.add{
-        type = "table",
-        name = RPName("color_flow"),
-        colspan = 4
-    }
-
-    self:addHeader("red")
-    self:addHeader("green")
-    self:addHeader("blue")
-    self:addHeader("hex")
-
-    self:addField("red", 40)
-    self:addField("green", 40)
-    self:addField("blue", 40)
-    self:addField("hex", 65)
-
-    self:updateGui()
-    return self
-end
 
 function ColorTable:addHeader(name)
     self[name .. "Header"] = self.colorTable.add{
@@ -163,6 +137,31 @@ end
 function ColorTable:clearErrors()
     self.errorHandler:clearError(RailwayPainterConstants.Errors.ILLEGAL_COLOR)
     self.errorHandler:clearError(RailwayPainterConstants.Errors.ILLEGAL_HEX)
+end
+
+function ColorTable.new(parentElement, errorHandler)
+    local self = Object.new(ColorTable)
+    self.errorHandler = errorHandler
+    self.colorHex = "000000"
+
+    self.colorTable = parentElement.add{
+        type = "table",
+        name = RPName("color_flow"),
+        colspan = 4
+    }
+
+    self:addHeader("red")
+    self:addHeader("green")
+    self:addHeader("blue")
+    self:addHeader("hex")
+
+    self:addField("red", 40)
+    self:addField("green", 40)
+    self:addField("blue", 40)
+    self:addField("hex", 65)
+
+    self:updateGui()
+    return self
 end
 
 return ColorTable

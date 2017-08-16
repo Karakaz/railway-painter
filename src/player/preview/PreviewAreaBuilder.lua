@@ -1,13 +1,5 @@
 
 local PreviewAreaBuilder = {}
-PreviewAreaBuilder.__index = PreviewAreaBuilder
-
-function PreviewAreaBuilder.new(previewArea, playerName)
-    local self = setmetatable({}, PreviewAreaBuilder)
-    self.previewArea = previewArea
-    self.playerName = playerName
-    return self
-end
 
 function PreviewAreaBuilder:createPreviewArea()
     local surfaceName = RPName(self.playerName .. "_preview_surface")
@@ -71,6 +63,13 @@ function PreviewAreaBuilder:createGui(parentElement)
     }
     self.previewArea.camera.style.minimal_width = 50
     self.previewArea.camera.style.minimal_height = 300
+end
+
+function PreviewAreaBuilder.new(previewArea, playerName)
+    local self = Object.new(PreviewAreaBuilder)
+    self.previewArea = previewArea
+    self.playerName = playerName
+    return self
 end
 
 return PreviewAreaBuilder
