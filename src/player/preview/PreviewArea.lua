@@ -44,17 +44,19 @@ function PreviewArea:addWagons()
     if not self.cargoWagon then
         self.cargoWagon = self.surface.create_entity{
             name = "cargo-wagon",
-            position = {x = 1, y = 0},
-            color = self.colorManager:getColor()
+            position = {x = 1, y = 0}
         }
         if self.locomotive then
             self.cargoWagon.connect_rolling_stock(defines.rail_direction.front)
         end
 
+        local secondWagonType = "cargo-wagon"
+        if remote.interfaces["color-picker"] then
+            secondWagonType = "fluid-wagon"
+        end
         self.fluidWagon = self.surface.create_entity{
-            name = "cargo-wagon", --fluid wagons aren't colorable at the moment
-            position = {x = 1, y = -6},
-            color = self.colorManager:getColor()
+            name = secondWagonType,
+            position = {x = 1, y = -6}
         }
         self.fluidWagon.connect_rolling_stock(defines.rail_direction.front)
 

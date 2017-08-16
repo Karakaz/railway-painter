@@ -20,7 +20,7 @@ function SprayPainter:paintTrain(train, rule)
     self:colorEntities(train.locomotives.back_movers, color)
     if rule.wagons then
         self:colorEntities(train.cargo_wagons, color)
---        self:colorEntities(train.fluic_wagons, color) not colorable atm
+        self:colorEntities(train.fluid_wagons, color) -- Won't be shown unless color-picker is enabled
     end
 end
 
