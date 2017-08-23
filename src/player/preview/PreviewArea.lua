@@ -27,11 +27,14 @@ end
 
 function PreviewArea:addLocomotive()
     if not self.locomotive then
-        self.locomotive = self.surface.create_entity{
-            name = "locomotive",
-            position = {x = 1, y = 6},
-            direction = defines.direction.south
-        }
+        self.locomotive = self.surface.find_entity("locomotive", {1, 6})
+        if not self.locomotive then
+            self.locomotive = self.surface.create_entity{
+                name = "locomotive",
+                position = {x = 1, y = 6},
+                direction = defines.direction.south
+            }
+        end
         if self.cargoWagon then
             self.locomotive.connect_rolling_stock(defines.rail_direction.back)
         end
@@ -42,27 +45,53 @@ end
 
 function PreviewArea:addWagons()
     if not self.cargoWagon then
+        self:addFirstCargoWagon()
+        self:addSecondCargoWagon()
+        self.cargoWagon.color = self.colorManager:getColor()
+        self.fluidWagon.color = self.colorManager:getColor()
+    end
+end
+
+function PreviewArea:addFirstCargoWagon()
+    self.cargoWagon = self.surface.find_entity("cargo-wagon", {1, 0})
+    if not self.cargoWagon then
         self.cargoWagon = self.surface.create_entity{
             name = "cargo-wagon",
             position = {x = 1, y = 0}
         }
-        if self.locomotive then
-            self.cargoWagon.connect_rolling_stock(defines.rail_direction.front)
-        end
+    end
+    if self.locomotive then
+        self.cargoWagon.connect_rolling_stock(defines.rail_direction.front)
+    end
+end
 
-        local secondWagonType = "cargo-wagon"
-        if remote.interfaces["color-picker"] then
-            secondWagonType = "fluid-wagon"
+function PreviewArea:addSecondCargoWagon()
+    local secondWagonType = "cargo-wagon"
+    if remote.interfaces["color-picker"] then
+        secondWagonType = "fluid-wagon"
+    end
+
+    self.fluidWagon = self.surface.find_entity("cargo-wagon", {1, -6})
+    if self.fluidWagon and self.fluidWagon.type ~= secondWagonType then
+        self.fluidWagon.destroy()
+        self.fluidWagon = nil
+    end
+
+    if not self.fluidWagon then
+        self.fluidWagon = self.surface.find_entity("fluid-wagon", {1, -6})
+        if self.fluidWagon and self.fluidWagon.type ~= secondWagonType then
+            self.fluidWagon.destroy()
+            self.fluidWagon = nil
         end
+    end
+
+    if not self.fluidWagon then
         self.fluidWagon = self.surface.create_entity{
             name = secondWagonType,
             position = {x = 1, y = -6}
         }
-        self.fluidWagon.connect_rolling_stock(defines.rail_direction.front)
-
-        self.cargoWagon.color = self.colorManager:getColor()
-        self.fluidWagon.color = self.colorManager:getColor()
     end
+    self.fluidWagon.connect_rolling_stock(defines.rail_direction.front)
 end
 
 function PreviewArea:removeLocomotive()

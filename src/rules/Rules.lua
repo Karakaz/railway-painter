@@ -4,13 +4,11 @@ local Rule = require("src/rules/Rule")
 local Rules = {}
 
 function Rules:initialize()
+    global.rules = {}
     self:loadRulesFromGlobal()
 end
 
 function Rules:loadRulesFromGlobal()
-    if not global.rules then
-        global.rules = {}
-    end
     self.rules = global.rules
 end
 

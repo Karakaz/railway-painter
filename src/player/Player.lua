@@ -16,13 +16,13 @@ function Player:initialize()
 
         local technology = self.factorioPlayer.force.technologies[RPName("technology")]
         if technology and technology.researched then
-            self:enableRailwayPainter()
+            self:enableGuiButton()
         end
     end
 end
 
-function Player:enableRailwayPainter()
-    self.gui.builder:createGuiButton()
+function Player:enableGuiButton()
+    self.gui.guiButton.style.visible = true
 end
 
 function Player.new(factorioPlayer)

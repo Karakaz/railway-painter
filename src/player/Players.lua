@@ -4,13 +4,14 @@ local Player = require("src/player/Player")
 local Players = {}
 
 function Players:initialize()
+    global.players = {}
     self:loadPlayersFromGlobal()
+    for _,factorioPlayer in pairs(game.players) do
+        self:fetch(factorioPlayer):initialize()
+    end
 end
 
 function Players:loadPlayersFromGlobal()
-    if not global.players then
-        global.players = {}
-    end
     self.players = global.players
 end
 
@@ -22,9 +23,9 @@ end
 
 function Players:unlockRailwayPainter(force)
     for _,player in pairs(self.players) do
-       if player.force.name == force.name then
-           player:enableRailwayPainter()
-       end
+        if player.force.name == force.name then
+            player:enableGuiButton()
+        end
     end
 end
 
