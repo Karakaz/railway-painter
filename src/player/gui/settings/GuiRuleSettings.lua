@@ -16,6 +16,7 @@ function GuiRuleSettings:newRule()
     self.trainCheckbox.state = true
     self.wagonCheckbox.state = false
     self.colorManager:setHex("000000")
+    self.saveButton.enabled = false
     self:showSettingsFrame()
 end
 
