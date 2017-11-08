@@ -34,11 +34,14 @@ function PreviewArea:addLocomotive()
                 position = {x = 1, y = 6},
                 direction = defines.direction.south
             }
+            if not self.locomotive then
+                log("Could not create locomotive in preview area")
+                self:logEntitiesOnSurface()
+            end
         end
         if self.cargoWagon then
             self.locomotive.connect_rolling_stock(defines.rail_direction.back)
         end
-
         self.locomotive.color = self.colorManager:getColor()
     end
 end
@@ -59,6 +62,10 @@ function PreviewArea:addFirstCargoWagon()
             name = "cargo-wagon",
             position = {x = 1, y = 0}
         }
+        if not self.cargoWagon then
+            log("Could not create cargo-wagon in preview area")
+            self:logEntitiesOnSurface()
+        end
     end
     if self.locomotive then
         self.cargoWagon.connect_rolling_stock(defines.rail_direction.front)
@@ -90,6 +97,10 @@ function PreviewArea:addSecondCargoWagon()
             name = secondWagonType,
             position = {x = 1, y = -6}
         }
+        if not self.fluidWagon then
+            log("Could not create " .. secondWagonType .. " in preview area")
+            self:logEntitiesOnSurface()
+        end
     end
     self.fluidWagon.connect_rolling_stock(defines.rail_direction.front)
 end
@@ -135,6 +146,14 @@ end
 
 function PreviewArea:hide()
     self.previewFrame.style.visible = false
+end
+
+function PreviewArea:logEntitiesOnSurface()
+    log("Existing entities in previewArea (surface: " .. self.surface.name .. ")")
+    local entities = self.surface.find_entities()
+    for _,entity in pairs(entities) do
+        log("   " .. entity.type .. " {" .. entity.position.x .. ", " .. entity.position.y .. "}")
+    end
 end
 
 function PreviewArea.new(playerName, colorManager)

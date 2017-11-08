@@ -3,6 +3,12 @@ local SprayPainter = require("src/event/trigger/SprayPainter")
 
 local TriggerHandler = {}
 
+function TriggerHandler:refreshAllStations()
+    for _,rule in pairs(Rules:getRules()) do
+        self:ruleChanged(rule)
+    end
+end
+
 function TriggerHandler:ruleChanged(rule)
     local stations = game.surfaces["nauvis"].find_entities_filtered{
         type = "train-stop",
@@ -10,10 +16,9 @@ function TriggerHandler:ruleChanged(rule)
     }
     for _,station in pairs(stations) do
         if station.backer_name:find(rule.ruleText) then
-             SprayPainter:paintStation(station, rule)
+            SprayPainter:paintStation(station, rule)
         end
     end
-
 end
 
 function TriggerHandler:renamedStation(station)

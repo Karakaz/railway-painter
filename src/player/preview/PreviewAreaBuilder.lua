@@ -20,6 +20,10 @@ function PreviewAreaBuilder:createPreviewArea()
             position = {x = -1, y = 9},
             direction = defines.direction.south
         }
+        if not self.previewArea.trainStop then
+            log("Could not create train-stop in previewArea")
+            self.previewArea:logEntitiesOnSurface()
+        end
     end
 end
 
@@ -37,11 +41,19 @@ function PreviewAreaBuilder:setSurfaceFloorTransparent()
 end
 
 function PreviewAreaBuilder:layRails()
+    local failedToLayRail = false
     for y = -14,10,2 do
-        self.previewArea.surface.create_entity{
+        local rail = self.previewArea.surface.create_entity{
             name = "straight-rail",
             position = {x = 0, y = y}
         }
+        if not rail then
+            log("Could not create straight-rail at location {0, " .. y .. "} in preview area")
+            failedToLayRail = true
+        end
+    end
+    if failedToLayRail then
+        self.previewArea:logEntitiesOnSurface()
     end
 end
 

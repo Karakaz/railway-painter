@@ -8,6 +8,7 @@ function GuiRuleSettings:loadRule(rule)
     self.trainCheckbox.state = rule.trains
     self.wagonCheckbox.state = rule.wagons
     self.colorManager:setHex(rule.hex)
+    self.saveButton.enabled = true
     self:showSettingsFrame()
 end
 

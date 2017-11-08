@@ -47,6 +47,7 @@ function EventHandler.on_gui_click(event)
         player.gui:loadRule()
     elseif elementName == RPName("delete_button") then
         player.gui:deleteRule()
+        TriggerHandler:refreshAllStations()
     elseif elementName == RPName("new_button") then
         player.gui:newRule()
     elseif elementName == RPName("save_button") then
@@ -106,13 +107,12 @@ function EventHandler.on_built_entity(event)
 end
 
 function EventHandler.on_train_changed_state(event)
-    if event.train.state == defines.train_state.manual_control then
-        local station = train_util.findStationForManualTrain(event.train)
+    if event.train.state == defines.train_state.manual_control or
+       event.train.state == defines.train_state.wait_station then
+        local station = event.train.station or train_util.findStationForManualTrain(event.train)
         if station then
             TriggerHandler:trainOnStation(event.train, station)
         end
-    elseif event.train.state == defines.train_state.wait_station then
-        TriggerHandler:trainOnStation(event.train, event.train.station)
     end
 end
 

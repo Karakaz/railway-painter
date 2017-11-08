@@ -12,12 +12,14 @@ function Player:initialize()
         self.colorManager = ColorManager.new(self.errorHandler)
         self.previewArea = PreviewArea.new(self.name, self.colorManager)
         self.gui = Gui.new(self.factorioPlayer, self.colorManager, self.previewArea, self.errorHandler)
-        self.initialized = true
 
         local technology = self.factorioPlayer.force.technologies[RPName("technology")]
         if technology and technology.researched then
             self:enableGuiButton()
         end
+
+        log("Player " .. self.name .. " has been initialized")
+        self.initialized = true
     end
 end
 
