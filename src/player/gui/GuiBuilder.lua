@@ -45,7 +45,7 @@ function GuiBuilder:addGuiFrame()
     self.gui.frameTable = self.gui.frame.add{
         type = "table",
         name = RPName("frame_table"),
-        colspan = 1
+        column_count = 1
     }
     self:addErrorLabel()
 

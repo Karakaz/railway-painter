@@ -12,7 +12,7 @@ function GuiRuleSettingsBuilder:createGui(parentElement)
     self.settings.frameTable = self.settings.frame.add{
         type = "table",
         name = RPName("settings_frame_table"),
-        colspan = 1
+        column_count = 1
     }
 
     self:addRuleField()

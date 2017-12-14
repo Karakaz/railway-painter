@@ -147,7 +147,7 @@ function ColorTable.new(parentElement, errorHandler)
     self.colorTable = parentElement.add{
         type = "table",
         name = RPName("color_flow"),
-        colspan = 4
+        column_count = 4
     }
 
     self:addHeader("red")

@@ -1,10 +1,4 @@
 
-data.raw["gui-style"].default["railway-painter_gui_button"] = {
-    type = "button_style",
-    parent = "button_style",
-    font = "railway-painter_small_font"
-}
-
 data:extend({
     {
         type = "font",
@@ -16,6 +10,7 @@ data:extend({
         type = "item",
         name = "railway-painter_icon_item",
         icon = "__railway-painter__/resources/railway-painter_logo_32.png",
+        icon_size = 32,
         flags = {"hidden"},
         stack_size = 1
     },
