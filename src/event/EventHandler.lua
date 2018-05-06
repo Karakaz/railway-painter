@@ -80,7 +80,12 @@ function EventHandler.on_gui_text_changed(event)
 
     if elementName == RPName("rule_field") then
         player.gui.settings:ruleUpdated()
-    else
+    elseif (
+        elementName == RPName("red_field") or
+        elementName == RPName("green_field") or
+        elementName == RPName("blue_field") or
+        elementName == RPName("hex_field")
+    ) then
         player.gui:colorFieldUpdated(event.element)
     end
 end
